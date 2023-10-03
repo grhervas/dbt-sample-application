@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: dbt
+      POSTGRES_PASSWORD: password1234
+      POSTGRES_DB: dbt_sample_app
+    volumes:
+      # Scripts to run when DB initialized 1st time
+      - ./db_setup:/docker-entrypoint-initdb.d
+      # - ./raw_data:/input_data
+      # - ./temp:/temp
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "dbt"]
+      interval: 5s
+      retries: 5
+    restart: always
+    ports:
+      - 5432:5432
