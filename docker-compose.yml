@@ -8,8 +8,8 @@ services:
     volumes:
       # Scripts to run when DB initialized 1st time
       - ./db_setup:/docker-entrypoint-initdb.d
-      # - ./raw_data:/input_data
-      # - ./temp:/temp
+      # Raw data files to load when init
+      - ./raw_data:/input_data
     healthcheck:
       test: ["CMD", "pg_isready", "-U", "dbt"]
       interval: 5s
