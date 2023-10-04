@@ -12,4 +12,4 @@ dbt_sample_app:
       user: dbt
       password: password1234
       dbname: dbt_sample_app
-      schema: warehouse
+      schema: jaffle_shop
