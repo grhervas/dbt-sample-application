@@ -1,15 +1,25 @@
 config:
   send_anonymous_usage_stats: False
 
-dbt_sample_app:
+default:
   target: dev
   outputs:
     dev:
       type: postgres
       threads: 4
-      host: localhost
-      port: 5432
-      user: dbt
-      password: password1234
-      dbname: dbt_sample_app
-      schema: jaffle_shop
+      host: "{{ env_var('DBT_POSTGRES_HOST_DEV') }}"
+      port: "{{ env_var('DBT_POSTGRES_PORT_DEV') | int }}"
+      user: "{{ env_var('DBT_POSTGRES_USER_DEV') }}"
+      password: "{{ env_var('DBT_POSTGRES_PWD_DEV') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME_DEV') }}"
+      schema: "{{ env_var('DBT_POSTGRES_SCHEMA_DEV') }}" 
+    
+    prod:
+      type: postgres
+      threads: 16
+      host: "{{ env_var('DBT_POSTGRES_HOST_PROD') }}"
+      port: "{{ env_var('DBT_POSTGRES_PORT_PROD') | int }}"
+      user: "{{ env_var('DBT_POSTGRES_USER_PROD') }}"
+      password: "{{ env_var('DBT_POSTGRES_PWD_PROD') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME_PROD') }}"
+      schema: "{{ env_var('DBT_POSTGRES_SCHEMA_PROD') }}" 

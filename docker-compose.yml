@@ -2,9 +2,9 @@ services:
   postgres:
     image: postgres
     environment:
-      POSTGRES_USER: dbt
-      POSTGRES_PASSWORD: password1234
-      POSTGRES_DB: dbt_sample_app
+      POSTGRES_USER: $DBT_POSTGRES_USER_DEV
+      POSTGRES_PASSWORD: $DBT_POSTGRES_PWD_DEV
+      POSTGRES_DB: $DBT_POSTGRES_DBNAME_DEV
     volumes:
       # Scripts to run when DB initialized 1st time
       - ./db_setup:/docker-entrypoint-initdb.d
@@ -16,4 +16,4 @@ services:
       retries: 5
     restart: always
     ports:
-      - 5432:5432
+      - $DBT_POSTGRES_PORT_DEV:5432

@@ -2,10 +2,10 @@ version: 2
 
 sources:
   - name: stripe
-    database: dbt_sample_app
-    schema: stripe
+    schema: raw
     tables:
-      - name: payments
+      - name: stripe_payments
+        alias: payments
         # loaded_at_field: _loaded_at  # This field needs to exist in source
         # freshness:
         #   warn_after: {count: 12, period: hour}

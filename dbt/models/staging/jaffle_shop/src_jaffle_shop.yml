@@ -3,10 +3,10 @@ version: 2
 sources:
   - name: jaffle_shop
     description: A clone of a Postgres application database.
-    database: dbt_sample_app
-    schema: jaffle_shop
+    schema: raw
     tables:
-      - name: customers
+      - name: jaffle_shop_customers
+        alias: customers
         description: Raw customers data.
         columns:
           - name: id
@@ -14,7 +14,8 @@ sources:
             tests:
               - unique
               - not_null
-      - name: orders
+      - name: jaffle_shop_orders
+        alias: orders
         description: Raw orders data.
         columns:
             - name: id

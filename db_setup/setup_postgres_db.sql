@@ -1,24 +1,23 @@
-CREATE SCHEMA IF NOT EXISTS jaffle_shop;
-CREATE SCHEMA IF NOT EXISTS stripe;
+CREATE SCHEMA IF NOT EXISTS raw;
 
 -- Define tables to load from raw data
-DROP TABLE IF EXISTS jaffle_shop.customers;
-CREATE TABLE jaffle_shop.customers (
+DROP TABLE IF EXISTS raw.jaffle_shop_customers;
+CREATE TABLE raw.jaffle_shop_customers (
     id INT,
     first_name TEXT,
     last_name TEXT
 );
 
-DROP TABLE IF EXISTS jaffle_shop.orders;
-CREATE TABLE jaffle_shop.orders (
+DROP TABLE IF EXISTS raw.jaffle_shop_orders;
+CREATE TABLE raw.jaffle_shop_orders (
     id INT,
     user_id INT,
     order_date TEXT,
     status TEXT
 );
 
-DROP TABLE IF EXISTS stripe.payments;
-CREATE TABLE stripe.payments (
+DROP TABLE IF EXISTS raw.stripe_payments;
+CREATE TABLE raw.stripe_payments (
     id INT,
     order_id INT,
     payment_method TEXT,
@@ -26,11 +25,11 @@ CREATE TABLE stripe.payments (
 );
 
 -- Load data from .csv files
-COPY jaffle_shop.customers(id, first_name, last_name)
+COPY raw.jaffle_shop_customers(id, first_name, last_name)
 FROM '/input_data/customers.csv' DELIMITER ',' CSV HEADER;
 
-COPY jaffle_shop.orders(id, user_id, order_date, status)
+COPY raw.jaffle_shop_orders(id, user_id, order_date, status)
 FROM '/input_data/orders.csv' DELIMITER ',' CSV HEADER;
 
-COPY stripe.payments(id, order_id, payment_method, amount)
+COPY raw.stripe_payments(id, order_id, payment_method, amount)
 FROM '/input_data/payments.csv' DELIMITER ',' CSV HEADER;
