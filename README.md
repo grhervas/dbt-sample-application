@@ -1,5 +1,10 @@
 # dbt-sample-application
-Small application to learn the basics of dbt.
+Small application to learn the basics of dbt. 
+
+References:
+- [dbt official courses](https://courses.getdbt.com/collections/courses)
+- [Start Data Engineering: dbt tutorial](https://www.startdataengineering.com/post/dbt-data-build-tool-tutorial/)
+- [GitHub: jaffle_shop data - dbt project](https://github.com/dbt-labs/jaffle_shop/blob/main/dbt_project.yml)
 
 ## Prerequisites
 
