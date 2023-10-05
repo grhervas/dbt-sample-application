@@ -4,4 +4,4 @@ select
     payment_method,
     -- Convert amount to dollars
     amount::decimal / 100 as amount
-from stripe.payments
+from {{ source('stripe', 'payments') }}

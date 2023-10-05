@@ -12,6 +12,8 @@ By default `dbt` will look for warehouse connections in the file `~/.dbt/profile
 
 ```shell
 export DBT_PROFILES_DIR=$(pwd)
+cd dbt
+dbt run
 ```
 
 
