@@ -1,0 +1,33 @@
+name: Deploy dbt models to Postgres DB
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -U pip && pip install -r requirements.txt
+
+      - name: Deploy dbt models to Postgres DB PROD
+        env:
+          DBT_PROFILES_DIR: ./
+          DBT_POSTGRES_HOST_PROD: ${{ secrets.DBT_POSTGRES_HOST_PROD }}
+          DBT_POSTGRES_PORT_PROD: ${{ secrets.DBT_POSTGRES_PORT_PROD }}
+          DBT_POSTGRES_USER_PROD: ${{ secrets.DBT_POSTGRES_USER_PROD }}
+          DBT_POSTGRES_PWD_PROD: ${{ secrets.DBT_POSTGRES_PWD_PROD }}
+          DBT_POSTGRES_DBNAME_PROD: ${{ secrets.DBT_POSTGRES_DBNAME_PROD }}
+          DBT_POSTGRES_SCHEMA_PROD: ${{ secrets.DBT_POSTGRES_SCHEMA_PROD }}
+        run: |
+          dbt build --target prod
