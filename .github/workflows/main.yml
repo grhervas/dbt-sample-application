@@ -30,4 +30,5 @@ jobs:
           DBT_POSTGRES_DBNAME_PROD: ${{ secrets.DBT_POSTGRES_DBNAME_PROD }}
           DBT_POSTGRES_SCHEMA_PROD: ${{ secrets.DBT_POSTGRES_SCHEMA_PROD }}
         run: |
+          cd dbt/
           dbt build --target prod
