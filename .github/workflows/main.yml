@@ -5,7 +5,7 @@ on:
     branches: [ main ]
 
 jobs:
-  deploy:
+  deploy-to-prod:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -30,5 +30,6 @@ jobs:
           DBT_POSTGRES_DBNAME_PROD: ${{ secrets.DBT_POSTGRES_DBNAME_PROD }}
           DBT_POSTGRES_SCHEMA_PROD: ${{ secrets.DBT_POSTGRES_SCHEMA_PROD }}
         run: |
+          echo $DBT_PROFILES_DIR
           cd dbt/
           dbt build --profiles-dir $DBT_PROFILES_DIR --target prod
