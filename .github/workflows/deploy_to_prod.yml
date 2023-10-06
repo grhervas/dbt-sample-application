@@ -1,4 +1,4 @@
-name: Deploy dbt models to Postgres DB
+name: Deploy dbt models to Postgres PROD DB
 
 on:
   push:

@@ -12,7 +12,17 @@ default:
       user: "{{ env_var('DBT_POSTGRES_USER_DEV') }}"
       password: "{{ env_var('DBT_POSTGRES_PWD_DEV') }}"
       dbname: "{{ env_var('DBT_POSTGRES_DBNAME_DEV') }}"
-      schema: "{{ env_var('DBT_POSTGRES_SCHEMA_DEV') }}" 
+      schema: "{{ env_var('DBT_POSTGRES_SCHEMA_DEV') }}"
+    
+    stag:
+      type: postgres
+      threads: 16
+      host: "{{ env_var('DBT_POSTGRES_HOST_STAG') }}"
+      port: "{{ env_var('DBT_POSTGRES_PORT_STAG') | int }}"
+      user: "{{ env_var('DBT_POSTGRES_USER_STAG') }}"
+      password: "{{ env_var('DBT_POSTGRES_PWD_STAG') }}"
+      dbname: "{{ env_var('DBT_POSTGRES_DBNAME_STAG') }}"
+      schema: "{{ env_var('DBT_POSTGRES_SCHEMA_STAG') }}" 
     
     prod:
       type: postgres

@@ -1,0 +1,33 @@
+name: Deploy dbt models to Postgres STAG DB on PR
+
+on:
+  pull_request:
+    branches: [ '*' ]
+
+jobs:
+  deploy-to-stag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -U pip && pip install -r requirements.txt
+
+      - name: Deploy dbt models to Postgres DB STAG
+        env:
+          DBT_POSTGRES_HOST_STAG: ${{ secrets.DBT_POSTGRES_HOST_STAG }}
+          DBT_POSTGRES_PORT_STAG: ${{ secrets.DBT_POSTGRES_PORT_STAG }}
+          DBT_POSTGRES_USER_STAG: ${{ secrets.DBT_POSTGRES_USER_STAG }}
+          DBT_POSTGRES_PWD_STAG: ${{ secrets.DBT_POSTGRES_PWD_STAG }}
+          DBT_POSTGRES_DBNAME_STAG: ${{ secrets.DBT_POSTGRES_DBNAME_STAG }}
+          DBT_POSTGRES_SCHEMA_STAG: dbt_pr${{ github.event.pull_request.number }}_$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)
+        run: |
+          cd dbt/
+          dbt build --profiles-dir ../ --target stag
