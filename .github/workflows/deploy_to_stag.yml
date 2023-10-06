@@ -27,7 +27,7 @@ jobs:
           DBT_POSTGRES_USER_STAG: ${{ secrets.DBT_POSTGRES_USER_STAG }}
           DBT_POSTGRES_PWD_STAG: ${{ secrets.DBT_POSTGRES_PWD_STAG }}
           DBT_POSTGRES_DBNAME_STAG: ${{ secrets.DBT_POSTGRES_DBNAME_STAG }}
-          DBT_POSTGRES_SCHEMA_STAG: dbt_pr${{ github.event.pull_request.number }}_$(echo ${{ github.event.pull_request.head.sha }} | cut -c1-7)
+          DBT_POSTGRES_SCHEMA_STAG: dbt_pr${{ github.event.pull_request.number }}
         run: |
           cd dbt/
           dbt build --profiles-dir ../ --target stag
