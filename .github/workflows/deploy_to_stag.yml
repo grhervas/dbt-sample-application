@@ -1,4 +1,4 @@
-name: Deploy dbt models to Postgres STAG DB on PR
+name: Deploy dbt models to STAG DB
 
 on:
   pull_request:
