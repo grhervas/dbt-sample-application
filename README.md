@@ -35,8 +35,21 @@ dbt run/build/test/...
 
 ## CI/CD pipelines
 The repo is configured to run 2 separate GitHub Actions workflows:
-- On any *push* to "main" branch, deploy to dbt_final schema in the remote Postgres db
-- On any Pull Request, deploy to dbt_pr{pull_request_number}_{short_commit_sha} schema
+- On any *push* to *"main"* branch, deploy to `dbt_final` schema in the remote Postgres db
+- On any *Pull Request*, deploy to `dbt_pr{pull_request_number}_{short_commit_sha}` schema
+
+For these pipelines to work, you need to define these roles beforehand on the Postgres db:
+
+```sql
+-- Role for dbt to deploy in PROD
+CREATE ROLE dbt_prod WITH LOGIN PASSWORD 'password_prod';
+GRANT ALL PRIVILEGES ON SCHEMA raw TO dbt_prod;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA "raw" TO dbt_prod;
+
+-- Role for dbt to deploy in STAG
+CREATE ROLE dbt_stag WITH CREATEDB LOGIN PASSWORD 'password_stag';
+GRANT CREATE ON DATABASE jaffle_shop_prod TO dbt_stag;
+```
 
 ## Future work
 - The STAG schemas related to the Pull Requests should be cleanup automatically after a given time to avoid bloating the db instance
