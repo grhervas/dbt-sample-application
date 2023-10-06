@@ -49,6 +49,8 @@ GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA "raw" TO dbt_prod;
 -- Role for dbt to deploy in STAG
 CREATE ROLE dbt_stag WITH CREATEDB LOGIN PASSWORD 'password_stag';
 GRANT CREATE ON DATABASE jaffle_shop_prod TO dbt_stag;
+GRANT USAGE ON SCHEMA raw TO dbt_stag;
+GRANT SELECT ON ALL TABLES IN SCHEMA raw TO dbt_stag;
 ```
 
 ## Future work
