@@ -22,7 +22,6 @@ jobs:
 
       - name: Deploy dbt models to Postgres DB PROD
         env:
-          DBT_PROFILES_DIR: ./
           DBT_POSTGRES_HOST_PROD: ${{ secrets.DBT_POSTGRES_HOST_PROD }}
           DBT_POSTGRES_PORT_PROD: ${{ secrets.DBT_POSTGRES_PORT_PROD }}
           DBT_POSTGRES_USER_PROD: ${{ secrets.DBT_POSTGRES_USER_PROD }}
@@ -30,6 +29,5 @@ jobs:
           DBT_POSTGRES_DBNAME_PROD: ${{ secrets.DBT_POSTGRES_DBNAME_PROD }}
           DBT_POSTGRES_SCHEMA_PROD: ${{ secrets.DBT_POSTGRES_SCHEMA_PROD }}
         run: |
-          echo "DBT_PROFILES_DIR=$(pwd)" >> $GITHUB_ENV
           cd dbt/
-          dbt build --profiles-dir $DBT_PROFILES_DIR --target prod
+          dbt build --profiles-dir ../ --target prod
