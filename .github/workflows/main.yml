@@ -31,4 +31,4 @@ jobs:
           DBT_POSTGRES_SCHEMA_PROD: ${{ secrets.DBT_POSTGRES_SCHEMA_PROD }}
         run: |
           cd dbt/
-          dbt build --target prod
+          dbt build --profiles-dir $DBT_PROFILES_DIR --target prod
