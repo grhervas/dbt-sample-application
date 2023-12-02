@@ -1,0 +1,22 @@
+{
+    "python.defaultInterpreterPath": "${workspaceFolder}/venv/bin/python",
+    "python.envFile": "${workspaceFolder}/.env",
+    "python.terminal.activateEnvironment": true,
+    "files.associations": {
+        "*.sql": "jinja-sql",
+        "*.yml": "jinja-yaml"
+    },
+    // make a vertical line so I don't make lines too long
+    "editor.rulers": [100],
+    // Config sqlfluff extension for dbt
+    "sqlfluff.executablePath": "${workspaceFolder}/venv/bin/sqlfluff",
+    "sqlfluff.dialect": "postgres",
+    "sqlfluff.linter.run": "onSave", // alternatively "onType" if you'd like it more frequent
+    "sqlfluff.experimental.format.executeInTerminal": true,
+    "editor.formatOnSave": false,
+    "sqlfluff.excludeRules": [
+        "ST07"
+    ],
+    "dbt.queryLimit": 500,
+    "dbt.enableNewLineagePanel": true,
+}
