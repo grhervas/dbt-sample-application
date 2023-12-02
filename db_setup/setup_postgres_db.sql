@@ -25,7 +25,7 @@ CREATE TABLE raw.stripe_payments (
 );
 
 -- Load data from .csv files
-COPY raw.jaffle_shop_customers(id, first_name, last_name)
+COPY raw.jaffle_shop_customers (id, first_name, last_name)
 FROM '/input_data/customers.csv' DELIMITER ',' CSV HEADER;
 
 COPY raw.jaffle_shop_orders(id, user_id, order_date, status)
