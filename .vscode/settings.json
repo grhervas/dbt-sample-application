@@ -3,8 +3,13 @@
     "python.envFile": "${workspaceFolder}/.env",
     "python.terminal.activateEnvironment": true,
     "files.associations": {
-        "*.sql": "jinja-sql",
-        "*.yml": "jinja-yaml"
+        "**/dbt/**/*.sql": "jinja-sql",
+        // optional: don't format models in `target/` dir
+        "**/target/**": "",
+        // I don't personally use these, but you can also have jinja work for `yaml` and `md` files
+        "**/dbt/**/*.yaml": "jinja-yaml",
+        "**/dbt/**/*.yml": "jinja-yaml",
+        "**/dbt/**/docs/**/*.md": "jinja-md"
     },
     // make a vertical line so I don't make lines too long
     "editor.rulers": [100],
